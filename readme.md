@@ -1,8 +1,9 @@
-# Ben and Alicia's Game Trade App
+# Image Albums
 
-Post your games for trade. Find games that are available for trade. Select games that interest you and offer one of your games to trade. Accept or decline trades offered by other users. 
+Login to create albums and upload images into your albums. Remove images from albums or remove albums entirely. Toggle the privacy of your albums for other users to view. View public albums and their images shared by other users. Add another user's image to your favorites. This gives that image's album a point and you'll be able to see that image in your favorite images collection. You can un-favorite an image from your collection. 
 
-### Deployed at https://gametrade2016.herokuapp.com/ 
+
+### Deployed at:   
 
 To begin enter `npm run setup`.  This will install all dependencies.
 
