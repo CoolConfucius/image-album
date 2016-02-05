@@ -1,0 +1,23 @@
+{
+  "name": "imagealbums",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Benjamin Huang <coolconfucius@yahoo.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "firebase": "^2.4.0",
+    "bootswatch-dist": "darkly"
+  }
+}

@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  .jumbotron
+    h1= title
+
+  if user 
+    if state === "home"
+      .text-center
+        a#addAlbum.btn.btn-success.btn-lg(href='/addAlbum')  Add an Album
+    
+    if state === "myalbums" || state === "albums"
+      .container#myalbums
+        if albums
+          br
+          if state === "myalbums" && albums.length === 0
+            h3 You currently don't have any albums
+          else 
+            .row
+              .col-xs-2 Title
+              .col-xs-4 Description
+              .col-xs-2 Posted At
+              .col-xs-1 Points
+            hr  
+            each album in albums 
+              .row.album
+                if state === "myalbums"
+                  .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=user._id)=album.title
+                else 
+                  .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=album.user)=album.title
+                .col-xs-4.description= album.description
+                .col-xs-2.date= album.shortDate
+                .col-xs-1= album.points
+                if state === "myalbums"
+                  if album.private
+                    .col-xs-2 Private
+                  else 
+                    .col-xs-2 Public
+
+      
+      if state === "myalbums"
+        hr
+        a#addAlbum.btn.btn-success(href='/addAlbum')  Add an Album
+
+      hr
+      a.btn.btn-info(href='/') Back
+
+
+block scripts
+  script(src='/lib/firebase/firebase.js')
+  script(src="/js/main.js")

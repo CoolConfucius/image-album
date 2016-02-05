@@ -1,0 +1,88 @@
+extends layout
+
+block content
+
+  if state === "showalbum"
+    .jumbotron.text-center
+      h2= "Album owner:   " + owner.email
+      h1= album.title
+      h3= album.description
+      h5= "Points: " + album.points
+      //- h4= "album posted on: " + album.postedAt
+    .row
+      .col-xs-6
+        h4= "album posted on: " + album.formattedDate
+      .col-xs-3.col-xs-offset-3
+        if album.private
+          h3 Private Album
+        else 
+          h3 Public Album
+    .container#images
+      if album.images 
+        br
+        if album.images.length === 0 && owner.email === user.email
+          h3 Your album is currently empty. Add an image!
+        else 
+          .row
+            each image in album.images
+              .col-xs-1.showImage.btn.btn-primary(data-owner=owner._id, data-album=album._id, data-image=image._id)= image.filename
+              .col-xs-5
+                img.thumb(src=image.url, alt="yo")
+    hr
+
+    if owner.email !== user.email
+      a.btn.btn-info(href='/albums') Back
+    else
+      a.btn.btn-success.btn-lg(href='/addImage/'+albumid)  Add an Image 
+      br
+      br
+      a.btn.btn-info(href='/albums/mine') Back
+      hr
+      .row
+        .btn.btn-warning.col-xs-2#toggle(data-album=albumid, data-user=user._id) Toggle Privacy
+        .btn.btn-danger.col-xs-offset-2#removeAlbum(data-album=albumid, data-user=user._id) Remove Album
+  
+  if state === "showimage"
+    .jumbotron.text-center
+      h2= "Album owner:   " + owner.email
+      h1= album.title
+      h3= album.description
+      hr
+      h4= image.filename
+      img.imageDetail(src=image.url, alt="yo")
+      br
+
+      a.btn.btn-info(href='/albums/'+album._id+'/'+owner._id) Back
+      hr
+    if owner.email === user.email  
+      .btn.btn-danger#removeImage(data-owner=owner._id, data-album=album._id, data-image=image._id) Remove Image from Album  
+    else 
+      .btn.btn-success#faveImage(data-owner=owner._id, data-album=album._id, data-image=image._id) Add Image to Favorites
+        
+  if state === "faveimages"
+    .container#images
+      if user.faveimages 
+        br
+        if user.faveimages.length === 0 
+          h3 You currently don't have favorite images. 
+        else 
+          .row
+            each image in user.faveimages
+              .col-xs-1
+                span.filename= image.filename
+                .btn.btn-danger.btn-sm.unfaveImage(data-album="", data-image=image._id) Un-fave  
+              .col-xs-5
+                img.thumb(src=image.url, alt="yo")
+    
+    hr
+    a.btn.btn-info(href='/albums') Browse Public Albums
+
+block scripts
+  script(src="/js/main.js")
+
+      
+      
+        
+    
+      
+  

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  form
+    .form-group
+      label(for='email') Email address
+      input#email.form-control(type='email', placeholder='Email')
+    .form-group
+      label(for='password') Password
+      input#password.password.form-control(type='password', placeholder='Password')
+    if state === 'register'
+      .form-group
+        label(for='password2') Password (again)
+        input#password2.password.form-control(type='password', placeholder='Password')
+    if state === 'changepassword'
+      .form-group
+        label(for='newpassword') New Password 
+        input#newpassword.password.form-control(type='password', placeholder='Password')
+
+    if state === 'register'
+      button.btn.btn-info.register#go(type='submit') Register
+    else if state === 'login'
+      button.btn.btn-info.login#go(type='submit') Login
+      hr
+      button.btn.btn-warning#forgot Forgot Password
+    else if state === 'changepassword'
+      button.btn.btn-success.changepassword#go(type='submit') Change Password
+
+block scripts
+  script(src="/js/form.js")
+  
