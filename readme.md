@@ -3,7 +3,7 @@
 Login to create albums and upload images into your albums. Remove images from albums or remove albums entirely. Toggle the privacy of your albums for other users to view. View public albums and their images shared by other users. Add another user's image to your favorites. This gives that image's album a point and you'll be able to see that image in your favorite images collection. You can un-favorite an image from your collection. 
 
 
-### Deployed at:   
+### Deployed at:   https://albums2016.herokuapp.com/
 
 To begin enter `npm run setup`.  This will install all dependencies.
 
