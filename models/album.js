@@ -11,7 +11,7 @@ var albumSchema = new mongoose.Schema({
   title: {type: String },
   description: { type: String },
   owner: { type: String },
-  tags: [ { type: String } ],
+  tags: { type: String },
   points: { type: Number, default: 0 },
   coverurl: { type: String },
   private: { type: Boolean, default: false },

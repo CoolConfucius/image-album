@@ -8,7 +8,6 @@ block content
       h1= album.title
       h3= album.description
       h5= "Points: " + album.points
-      //- h4= "album posted on: " + album.postedAt
     .row
       .col-xs-6
         h4= "album posted on: " + album.formattedDate
@@ -17,6 +16,8 @@ block content
           h3 Private Album
         else 
           h3 Public Album
+    h5= "Tags: " + album.tags
+
     .container#images
       if album.images 
         br

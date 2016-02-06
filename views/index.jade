@@ -14,8 +14,8 @@ block content
     
     if state === "myalbums" || state === "albums"
       if state === "albums"
-        input#search(type="text", placeholder="Find album by tags")
-        a.btn.btn-success.btn-sm(href='/') Go
+        input#filter(type="text", placeholder="Find album by tags")
+        .btn.btn-success.btn-sm#go Go
 
 
       .container#myalbums
@@ -50,7 +50,7 @@ block content
                     .col-xs-2 Public
                 else 
                   .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=album.user)=album.title
-                  .col-xs-3.description= album.description
+                  .col-xs-4.description= album.description
                   .col-xs-2.date= album.shortDate
                   .col-xs-1= album.points
                   .col-xs-1= album.owner

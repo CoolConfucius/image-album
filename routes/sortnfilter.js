@@ -16,7 +16,7 @@ router.use(authMiddleware);
 //   })
 //   .populate('albums')
 //   .exec(function(err, users){
-//     console.log(users, "USERS");
+    // console.log(users, "USERS");
 //     if(err) return res.status(400).send(err); 
 //     var albums = []; 
 //     users.forEach(function(entry){
@@ -38,7 +38,7 @@ router.use(authMiddleware);
 // Sorting: 
 router.get('/sorttitle/:num', function(req, res, next) {
   User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
-    console.log(users, "USERS");
+    // console.log(users, "USERS");
     if(err) return res.status(400).send(err); 
     var albums = []; 
     users.forEach(function(entry){
@@ -49,8 +49,7 @@ router.get('/sorttitle/:num', function(req, res, next) {
         };
       })
     });
-    albums = albums.sort(
-      function(a, b){
+    albums = albums.sort(function(a, b){
       if (req.params.num === "-1") {
         if (a.title > b.title)
           return 1;
@@ -68,45 +67,111 @@ router.get('/sorttitle/:num', function(req, res, next) {
       }
     });
     res.render('index', { 
-      title: "Public Albums", user: req.user, albums: albums, state: "albums"
+      title: "Sorting by Title", user: req.user, albums: albums, state: "albums"
     });
   });
-
-  // Album.find({
-
-  // }, function(err, products) {
-  //   if (err) {
-  //     return res.status(400).send(err);
-  //   };
-  //   res.render('index', { 
-  //     title: 'Album Wish List', 
-  //     products: products, 
-  //     subTitle: "Sorting by Name"});
-  // }).sort( { name: parseInt(req.params.num) } );
 });
 
-// router.get('/sortpoints/:num', function(req, res, next) {
-//   Album.find({}, function(err, products) {
-//     if (err) {
-//       return res.status(400).send(err);
-//     };
-//     res.render('index', { 
-//       title: 'Album Wish List', 
-//       products: products, 
-//       subTitle: "Sorting by Price"});
-//   }).sort( { price: parseInt(req.params.num) } );
-// });
 
-// router.get('/sortdate/:num', function(req, res, next) {
-//   Album.find({}, function(err, products) {
-//     if (err) {
-//       return res.status(400).send(err);
-//     };
-//     res.render('index', { 
-//       title: 'Album Wish List', 
-//       products: products, 
-//       subTitle: "Sorting by Date Added"});
-//   }).sort( { addedAt: parseInt(req.params.num) } );
-// });
+router.get('/sortdate/:num', function(req, res, next) {
+  User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
+    // console.log(users, "USERS");
+    if(err) return res.status(400).send(err); 
+    var albums = []; 
+    users.forEach(function(entry){
+      entry.albums.forEach(function(album){
+        if (!album.private) {
+          album.user = entry._id; 
+          albums.push(album);
+        };
+      })
+    });
+    albums = albums.sort(function(a, b){
+      if (req.params.num === "-1") {
+        if (a.postedAt > b.postedAt)
+          return 1;
+        else if (a.postedAt < b.postedAt)
+          return -1;
+        else 
+          return 0;
+      } else {
+        if (a.postedAt > b.postedAt)
+          return -1;
+        else if (a.postedAt < b.postedAt)
+          return 1;
+        else 
+          return 0;
+      }
+    });
+    res.render('index', { 
+      title: "Sorting by Date", user: req.user, albums: albums, state: "albums"
+    });
+  });
+});
+
+router.get('/sortpoints/:num', function(req, res, next) {
+  User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
+    if(err) return res.status(400).send(err); 
+    var albums = []; 
+    users.forEach(function(entry){
+      entry.albums.forEach(function(album){
+        if (!album.private) {
+          album.user = entry._id; 
+          albums.push(album);
+        };
+      })
+    });
+    albums = albums.sort(function(a, b){
+      if (req.params.num === "-1") {
+        if (a.points > b.points)
+          return 1;
+        else if (a.points < b.points)
+          return -1;
+        else 
+          return 0;
+      } else {
+        if (a.points > b.points)
+          return -1;
+        else if (a.points < b.points)
+          return 1;
+        else 
+          return 0;
+      }
+    });
+    res.render('index', { 
+      title: "Sorting by Points", user: req.user, albums: albums, state: "albums"
+    });
+  });
+});
+
+
+router.get('/filter/:filter', function(req, res, next) {
+  console.log("Filter!", req.params.filter);
+  User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
+    if(err) return res.status(400).send(err); 
+    var albums = []; 
+    var filter = req.params.filter.split('-');
+    users.forEach(function(entry){
+      entry.albums.forEach(function(album){
+        if (!album.private) {
+          album.user = entry._id; 
+          albums.push(album);
+        };
+      })
+    });
+    albums = albums.filter(function(album){
+      var tags = album.tags;
+      var bool = false; 
+      for (var i = 0; i < filter.length; i++) {
+        if (tags.includes(filter[i])) bool = true; 
+        // if ( value.tags.indexOf(filter[i]) !== -1 ) bool = true; 
+      };
+      return bool; 
+    });
+    res.render('index', { 
+      title: "Showing: "+filter.join(' '), user: req.user, albums: albums, state: "albums"
+    });
+  });
+});
 
 module.exports = router;

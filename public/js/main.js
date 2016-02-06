@@ -15,6 +15,7 @@ function init() {
   $('.unfaveImage').click(unfaveImage);
 
   $('.sort').click(sort); 
+  $('#go').click(filter); 
 }
 
 function showAlbum(){
@@ -127,4 +128,14 @@ function sort(){
   $.get(send, function(data) {
     location.replace(send);
   });
+}
+
+
+function filter(){
+  var filter = $('#filter').val();
+  if (!filter) { return; };
+  var string = filter.toLowerCase().split(/\W/).join('-'); 
+  $.get('/sortnfilter/filter/'+string, function(req, res, next){
+    location.replace('/sortnfilter/filter/'+string);
+  })
 }
