@@ -122,7 +122,7 @@ router.get('/sortpoints/:num', function(req, res, next) {
 
 
 router.get('/filter/:filter', function(req, res, next) {
-  console.log("Filter!", req.params.filter);
+  // console.log("Filter!", req.params.filter);
   User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
     if(err) return res.status(400).send(err); 
     var albums = []; 

@@ -11,14 +11,15 @@ var userSchema = new mongoose.Schema({
   uid: { type: String },
   email: { type: String }, 
   albums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
-  favealbums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
-  faveimages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }], 
-  profile: {
-    name: String,
-    phone: Number, 
-    birthday: Date,
-    aboutme: String
-  }
+  // favealbums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
+  faveimages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }]
+  // , 
+  // profile: {
+  //   name: String,
+  //   phone: Number, 
+  //   birthday: Date,
+  //   aboutme: String
+  // }
   
 });
 

@@ -45,28 +45,6 @@ router.post('/:album/:image', function(req, res, next){
 });
 
 
-// router.post('/:owner/:album/:image', function(req, res, next){
-//   User.findById(req.user._id, function(err, user){
-//     Album.findById(req.params.album, function(err, album){
-//       if(err) res.status(400).send(err);
-//       Image.findById(req.params.image, function(err, image){
-//         if(err) res.status(400).send(err);
-
-//         album.points++; 
-//         album.save(function(err, savedAlbum){
-//           image.album = req.params.album; 
-//           image.owner = req.params.owner;
-//           user.faveimages.push(image._id);
-//           user.save(function(err, savedUser){
-//             res.status(err ? 400 : 200).send(err || savedAlbum);
-//           });
-//         });
-//       });
-//     });    
-//   });
-// });
-
-
 router.delete('/:image', function(req, res, next){
   User.findById(req.user._id, function(err, user){
     Album.findOne({ images: { $in: [req.params.image] } }, function(err, album){

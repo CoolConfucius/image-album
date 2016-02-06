@@ -13,7 +13,7 @@ var albumSchema = new mongoose.Schema({
   owner: { type: String },
   tags: { type: String },
   points: { type: Number, default: 0 },
-  coverurl: { type: String },
+  // coverurl: { type: String },
   private: { type: Boolean, default: false },
   postedAt: { type: Date, default: Date.now }, 
   formattedDate: { type: String, default: moment().format('MM/DD/YYYY, h:mm a') }, 
