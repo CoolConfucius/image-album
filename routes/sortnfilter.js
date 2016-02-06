@@ -8,33 +8,6 @@ var Image = require('../models/image');
 var User = require('../models/user');
 router.use(authMiddleware);
 
-
-// router.get('/', function(req, res, next) {  
-//   User
-//   .find({
-//     '_id': { $ne: req.user._id}
-//   })
-//   .populate('albums')
-//   .exec(function(err, users){
-    // console.log(users, "USERS");
-//     if(err) return res.status(400).send(err); 
-//     var albums = []; 
-//     users.forEach(function(entry){
-//       entry.albums.forEach(function(album){
-//         if (!album.private) {
-//           album.user = entry._id; 
-//           albums.push(album);
-//         };
-//       });
-//     });
-//     res.render('index', { 
-//       title: "Public Albums", user: req.user, albums: albums, state: "albums"
-//     });
-//   });
-// });
-
-
-
 // Sorting: 
 router.get('/sorttitle/:num', function(req, res, next) {
   User.find({'_id': { $ne: req.user._id}}).populate('albums').exec(function(err, users){
@@ -44,7 +17,8 @@ router.get('/sorttitle/:num', function(req, res, next) {
     users.forEach(function(entry){
       entry.albums.forEach(function(album){
         if (!album.private) {
-          album.user = entry._id; 
+          album.user = entry._id;
+          album.owner = entry.email;           
           albums.push(album);
         };
       })
@@ -81,7 +55,8 @@ router.get('/sortdate/:num', function(req, res, next) {
     users.forEach(function(entry){
       entry.albums.forEach(function(album){
         if (!album.private) {
-          album.user = entry._id; 
+          album.user = entry._id;
+          album.owner = entry.email; 
           albums.push(album);
         };
       })
@@ -116,7 +91,8 @@ router.get('/sortpoints/:num', function(req, res, next) {
     users.forEach(function(entry){
       entry.albums.forEach(function(album){
         if (!album.private) {
-          album.user = entry._id; 
+          album.user = entry._id;
+          album.owner = entry.email; 
           albums.push(album);
         };
       })
@@ -154,7 +130,8 @@ router.get('/filter/:filter', function(req, res, next) {
     users.forEach(function(entry){
       entry.albums.forEach(function(album){
         if (!album.private) {
-          album.user = entry._id; 
+          album.user = entry._id;
+          album.owner = entry.email; 
           albums.push(album);
         };
       })
@@ -164,7 +141,6 @@ router.get('/filter/:filter', function(req, res, next) {
       var bool = false; 
       for (var i = 0; i < filter.length; i++) {
         if (tags.includes(filter[i])) bool = true; 
-        // if ( value.tags.indexOf(filter[i]) !== -1 ) bool = true; 
       };
       return bool; 
     });

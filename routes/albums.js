@@ -120,21 +120,5 @@ router.put('/toggle/:album', function(req, res, next){
   });
 });
 
-// Add to Favorite Albums
-// router.post('/', function(req, res) {
-//   User.findById(req.user._id, function(err, user) {
-//     req.body.user = req.user._id; 
-//     var album = new Album(req.body); 
-//     album.save(function(err, savedAlbum){
-      
-//       if (err) {res.status(400).send(err)};
-//       user.albums.push(album._id);
-//       user.save(function(err, savedUser) {
-//         res.status(err ? 400 : 200).send(err || savedUser); 
-//       });
-//     });
-//   });
-// });
-
 
 module.exports = router;

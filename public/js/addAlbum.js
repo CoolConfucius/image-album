@@ -15,7 +15,7 @@ function addAlbum(e){
   $.post('/albums', {
     title: $('#title').val(),
     description: $('#description').val(),
-    tags: tags,
+    tags: tags
   })
   .success(function() {
     console.log('success');

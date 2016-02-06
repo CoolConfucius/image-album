@@ -26,9 +26,11 @@ block content
         else 
           .row
             each image in album.images
-              .col-xs-1.showImage.btn.btn-primary(data-owner=owner._id, data-album=album._id, data-image=image._id)= image.filename
-              .col-xs-5
-                img.thumb(src=image.url, alt="yo")
+              .col-xs-12.col-sm-6.col-md-4.col-lg-3
+                .row
+                  .showImage.btn.btn-primary(data-owner=owner._id, data-album=album._id, data-image=image._id)= image.filename
+                .row 
+                  img.thumb(src=image.url, alt="yo")
     hr
 
     if owner.email !== user.email
