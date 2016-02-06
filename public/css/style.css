@@ -35,6 +35,11 @@
   max-height: 300px; 
 }
 
+.item {
+  min-width: 300px; 
+  min-height: 300px;  
+}
+
 .glow {
   color: black;
   text-shadow: 
