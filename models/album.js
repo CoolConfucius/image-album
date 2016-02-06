@@ -18,11 +18,11 @@ var albumSchema = new mongoose.Schema({
   postedAt: { type: Date, default: Date.now }, 
   formattedDate: { type: String, default: moment().format('MM/DD/YYYY, h:mm a') }, 
   shortDate: { type: String, default: moment().format('MM/DD/YYYY') }, 
-  comments: [{ 
-    name: String, 
-    body: String, 
-    date: Date 
-  }], 
+  // comments: [{ 
+  //   name: String, 
+  //   body: String, 
+  //   date: Date 
+  // }], 
   images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }]
 }); 
 

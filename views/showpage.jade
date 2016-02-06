@@ -52,10 +52,12 @@ block content
       h3= album.description
       hr
       h4= image.filename
-      img.imageDetail(src=image.url, alt="yo")
+      .imageDetail
+        img(src=image.url, alt="yo")
       br
 
-      a.btn.btn-info(href='/albums/'+album._id+'/'+owner._id) Back
+      a.btn.btn-info(href='/albums/'+album._id+'/'+owner._id) See Album
+      a.btn.btn-warning(href='/faves') Your Favorites
       hr
     if owner.email === user.email  
       .btn.btn-danger#removeImage(data-owner=owner._id, data-album=album._id, data-image=image._id) Remove Image from Album  
@@ -71,11 +73,14 @@ block content
         else 
           .row
             each image in user.faveimages
-              .col-xs-1
-                span.filename= image.filename
-                .btn.btn-danger.btn-sm.unfaveImage(data-album="", data-image=image._id) Un-fave  
-              .col-xs-5
-                img.thumb(src=image.url, alt="yo")
+              .col-xs-12.col-sm-6.col-md-4.item
+                .row
+                  a.filename.btn.btn-primary(href='/faves/show/'+image._id)= image.filename                  
+                .row
+                  .btn.btn-danger.btn-sm.unfaveImage(data-album="", data-image=image._id) Un-fave  
+                .row 
+                  img.thumb(src=image.url, alt="yo")
+
     
     hr
     a.btn.btn-info(href='/albums') Browse Public Albums

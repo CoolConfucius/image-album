@@ -9,6 +9,7 @@
 .imageDetail {
   max-width: 600px; 
   max-height: 600px; 
+  overflow: auto; 
 }
 
 #addImageForm {
@@ -36,8 +37,8 @@
 }
 
 .item {
-  min-width: 300px; 
-  min-height: 300px;  
+  min-width: 350px; 
+  min-height: 350px;  
 }
 
 .glow {

@@ -15,7 +15,8 @@ var Image;
 var imageSchema = new mongoose.Schema({
   filename: { type: String },
   url: { type: String }, 
-  key: { type: String }
+  key: { type: String },
+  album: { type: String }
   // ,
   // description: { type: String },
   // contributors: [ { type: String } ],
