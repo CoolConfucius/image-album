@@ -16,6 +16,20 @@
   color: black;
 }
 
+.sort {
+  cursor: pointer;
+}
+
+.sort:hover {
+  font-size: 18px; 
+  color: black;
+  text-shadow: 
+    1px 0px 5px yellow, 0px 1px 5px yellow, 
+    2px 1px 5px yellow, 1px 2px 5px yellow,    
+    -1px -0px 5px yellow, -0px -1px 5px yellow, 
+    -2px -1px 5px yellow, -1px -2px 5px yellow
+}
+
 .thumb {
   max-width: 300px; 
   max-height: 300px; 

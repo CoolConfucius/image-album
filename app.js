@@ -28,6 +28,7 @@ app.use('/users', require('./routes/users'));
 app.use('/albums', require('./routes/albums'));
 app.use('/images', require('./routes/images'));
 app.use('/faves', require('./routes/faves'));
+app.use('/sortnfilter', require('./routes/sortnfilter'));
 app.use('/', require('./routes/index'));
 
 // catch 404 and handle error 

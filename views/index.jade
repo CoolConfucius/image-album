@@ -8,8 +8,16 @@ block content
     if state === "home"
       .text-center
         a#addAlbum.btn.btn-success.btn-lg(href='/addAlbum')  Add an Album
+      br
+      hr
+      a.btn.btn-danger(href='/users/changepassword') Change password
     
     if state === "myalbums" || state === "albums"
+      if state === "albums"
+        input#search(type="text", placeholder="Find album by tags")
+        a.btn.btn-success.btn-sm(href='/') Go
+
+
       .container#myalbums
         if albums
           br
@@ -17,25 +25,35 @@ block content
             h3 You currently don't have any albums
           else 
             .row
-              .col-xs-2 Title
-              .col-xs-4 Description
-              .col-xs-2 Posted At
-              .col-xs-1 Points
+              if state === "myalbums"
+                .col-xs-2 Title
+                .col-xs-4 Description
+                .col-xs-2 Posted At
+                .col-xs-1 Points
+              else 
+                .col-xs-2.sort#sortTitle Title
+                .col-xs-4 Description
+                .col-xs-2.sort#sortDate Posted At
+                .col-xs-1.sort#sortPoints Points
+                .col-xs-1 Owner
             hr  
             each album in albums 
               .row.album
                 if state === "myalbums"
                   .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=user._id)=album.title
-                else 
-                  .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=album.user)=album.title
-                .col-xs-4.description= album.description
-                .col-xs-2.date= album.shortDate
-                .col-xs-1= album.points
-                if state === "myalbums"
+                  .col-xs-4.description= album.description
+                  .col-xs-2.date= album.shortDate
+                  .col-xs-1= album.points
                   if album.private
                     .col-xs-2 Private
                   else 
                     .col-xs-2 Public
+                else 
+                  .col-xs-2.btn.btn-info.btn-sm.showAlbum(data-album=album._id, data-user=album.user)=album.title
+                  .col-xs-3.description= album.description
+                  .col-xs-2.date= album.shortDate
+                  .col-xs-1= album.points
+                  .col-xs-1= album.owner
 
       
       if state === "myalbums"

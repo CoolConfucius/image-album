@@ -36,6 +36,7 @@ router.get('/', function(req, res, next) {
       entry.albums.forEach(function(album){
         if (!album.private) {
           album.user = entry._id; 
+          album.owner = entry.email; 
           albums.push(album);
         };
       });

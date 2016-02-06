@@ -13,6 +13,8 @@ function init() {
 
   $('#faveImage').click(faveImage);
   $('.unfaveImage').click(unfaveImage);
+
+  $('.sort').click(sort); 
 }
 
 function showAlbum(){
@@ -116,3 +118,13 @@ function unfaveImage(){
 }
 
 
+function sort(){
+  var str = $(this).attr('id').toLowerCase(); 
+  var currenturl = $(location).attr('href').split('/');
+  console.log(currenturl, "URLCURRENT");
+  var num = (currenturl[4] === str && currenturl[5] === "1") ? "/-1" : "/1";
+  var send = '/sortnfilter/' + str + num; 
+  $.get(send, function(data) {
+    location.replace(send);
+  });
+}
